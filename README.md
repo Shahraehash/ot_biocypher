@@ -40,7 +40,7 @@ bash json_download.sh
 
 This will download JSON files for targets, diseases, molecules, and evidence into the `data/` directory.
 
-### 2. Generate Molecule Embeddings
+### 2. Generate Molecular Embeddings
 
 Generate molecular embeddings using Recursion's MolE foundation model. The embeddings should be saved as:
 
