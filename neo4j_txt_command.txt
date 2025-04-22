@@ -1,0 +1,1 @@
+bin/neo4j-admin database import full neo4j  --nodes=import/Disease.csv --nodes=import/Molecule.csv --nodes=import/Targets.csv  --relationships=import/Relationships.csv --overwrite-destination --array-delimiter='|' --multiline-fields=true

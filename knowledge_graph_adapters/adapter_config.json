@@ -1,0 +1,71 @@
+{
+    "disease": {
+      "required_fields": ["id"],
+      "fields": {
+        ":ID": "id",
+        "Disease_ID": "id",
+        "Name": "name",
+        "Description": "description",
+        ":LABEL": "DISEASE"
+      }
+    },
+    "targets": {
+      "required_fields": ["id"],
+      "fields": {
+        ":ID": "id",
+        "Target_ID": "id",
+        "Name": "approvedName",
+        "Symbol": "approvedSymbol",
+        "Biological_Type": "biotype",
+        ":LABEL": "TARGET"
+      }
+    },
+    "molecule": {
+      "required_fields": ["id"],
+      "embedding_keys": ["chembl_id", "embedding", "source"],
+      "fields": {
+        ":ID": "id",
+        "CHEMBL_ID": "id",
+        "Name": "name",
+        "Synonym_Names": "synonyms",
+        "Cross_Reference_Names": "crossReferences",
+        "Canonical_Smiles": "canonicalSmiles",
+        "Drug_Type": "drugType",
+        "Linked_Targets": "linkedTargets.rows",
+        "Linked_Diseases": "linkedDiseases.rows",
+        "Description": "description",
+        "Max_Clinicial_Trial_Phase": "maximumClinicalTrialPhase",
+        "is_Approved": "isApproved",
+        "Embedding": "Embedding",
+        "Embedding_Source": "Embedding_Source",
+        ":LABEL": "MOLECULE"
+      }
+    },
+    "evidence": {
+      "folder_keys": {
+        "cancer_biomarkers": ["datasourceId", "targetId", "diseaseId", "drugId", "score", "literature", "biomarkerName", "confidence", "drugResponse"],
+        "cancer_gene_census": ["datasourceId", "targetId", "diseaseId", "score", "literature"],
+        "chembl": ["datasourceId", "targetId", "diseaseId", "drugId", "score", "clinicalPhase", "clinicalStatus", "studyId", "urls", "variantEffect", "directionOnTrait"],
+        "clingen": ["datasourceId", "targetId", "diseaseId", "score", "studyId"],
+        "crispr": ["datasourceId", "targetId", "diseaseId", "score", "literature"],
+        "crispr_screen": ["datasourceId", "targetId", "diseaseId", "score", "literature", "studyId", "studyOverview"],
+        "europepmc": ["datasourceId", "targetId", "diseaseId", "score", "literature", "text"],
+        "eva": ["datasourceId", "targetId", "diseaseId", "score", "literature"],
+        "eva_somatic": ["datasourceId", "targetId", "diseaseId", "score"],
+        "expression_atlas": ["datasourceId", "targetId", "diseaseId", "score", "studyId", "studyOverview"],
+        "gene_burden": ["datasourceId", "targetId", "diseaseId", "score"],
+        "gene2phenotype": ["datasourceId", "targetId", "diseaseId", "score", "literature"],
+        "genomics_england": ["datasourceId", "targetId", "diseaseId", "score", "literature"],
+        "impc": ["datasourceId", "targetId", "diseaseId", "score", "literature"],
+        "intogen": ["datasourceId", "targetId", "diseaseId", "score", "cohortDescription"],
+        "orphanet": ["datasourceId", "targetId", "diseaseId", "score", "literature"],
+        "ot_genetics_portal": ["datasourceId", "targetId", "diseaseId", "score"],
+        "progeny": ["datasourceId", "targetId", "diseaseId", "score"],
+        "reactome": ["datasourceId", "targetId", "diseaseId", "score", "literature", "reactionName"],
+        "slapenrich": ["datasourceId", "targetId", "diseaseId", "score"],
+        "sysbio": ["datasourceId", "targetId", "diseaseId", "score", "studyOverview"],
+        "uniprot_literature": ["datasourceId", "targetId", "diseaseId", "score"],
+        "uniprot_variants": ["datasourceId", "targetId", "diseaseId", "score", "literature"]
+      }
+    }
+}
