@@ -41,9 +41,9 @@ def ensure_nodes_exist(relationship_df, nodes):
     new_relationship_df = new_relationship_df.groupby([':START_ID', ':END_ID'], group_keys=False).apply(custom_max)
     new_relationship_df = new_relationship_df.reset_index(drop=True)
     
-    # Replace empty strings with "No record"
-    for col in new_relationship_df.columns:
-        new_relationship_df[col] = new_relationship_df[col].apply(lambda x: "No record" if x == "" else x)
+    # Replace empty strings and NaN values with "No record"
+    new_relationship_df = new_relationship_df.replace(r'^\s*$', "No record", regex=True)
+    new_relationship_df = new_relationship_df.fillna("No record")
     
     # Reorder columns
     middle_cols = [col for col in new_relationship_df.columns if col not in [':START_ID', ':END_ID', ':TYPE']]

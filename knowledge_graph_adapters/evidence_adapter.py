@@ -48,6 +48,10 @@ def rename_and_construct_relationships(dataframe):
     Returns:
         pd.DataFrame: DataFrame with relationship data
     """
+    # First, replace all empty strings and NaN values with "No record" in the original dataframe
+    dataframe = dataframe.replace(r'^\s*$', "No record", regex=True)
+    dataframe = dataframe.fillna("No record")
+    
     if all(col in dataframe.columns for col in ['targetId', 'diseaseId', 'drugId']):
         # Handle relationships with drug, target, and disease
         remaining_columns = [item for item in dataframe.columns if item not in ['targetId', 'diseaseId', 'drugId']]
@@ -66,7 +70,10 @@ def rename_and_construct_relationships(dataframe):
         
         # Combine relationships
         concat_df = pd.concat([subset_1, subset_2], axis=0, ignore_index=True)
-        relationship_df = concat_df[[":START_ID"] + remaining_columns + [":END_ID", ":TYPE"]] 
+        relationship_df = concat_df[[":START_ID"] + remaining_columns + [":END_ID", ":TYPE"]]
+        # Replace any remaining empty strings
+        relationship_df = relationship_df.replace(r'^\s*$', "No record", regex=True)
+        relationship_df = relationship_df.fillna("No record")
         return relationship_df
     
     elif all(col in dataframe.columns for col in ['targetId', 'diseaseId']):
@@ -75,7 +82,10 @@ def rename_and_construct_relationships(dataframe):
         dataframe[':START_ID'] = dataframe['diseaseId']
         dataframe[':END_ID'] = dataframe['targetId']
         dataframe[':TYPE'] = dataframe['datasourceId'] + "DiseaseToTarget"
-        relationship_df = dataframe[[":START_ID"] + remaining_columns + [":END_ID", ":TYPE"]] 
+        relationship_df = dataframe[[":START_ID"] + remaining_columns + [":END_ID", ":TYPE"]]
+        # Replace any remaining empty strings
+        relationship_df = relationship_df.replace(r'^\s*$', "No record", regex=True)
+        relationship_df = relationship_df.fillna("No record")
         return relationship_df
     
     else:

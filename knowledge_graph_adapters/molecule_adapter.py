@@ -79,6 +79,10 @@ def create_links_to_disease_targets(moleculed_df):
     Returns:
         tuple: (molecule_df, target_relationships_df, disease_relationships_df)
     """
+    # First, replace all empty strings with "No record"
+    moleculed_df = moleculed_df.replace(r'^\s*$', "No record", regex=True)
+    moleculed_df = moleculed_df.fillna("No record")
+    
     # Prepare molecule DataFrame
     molecule_columns = [':ID', 'CHEMBL_ID', 'Name', 'Synonym_Names', 'Cross_Reference_Names', 
                       'Canonical_Smiles', 'Drug_Type', 'Description', 'Max_Clinicial_Trial_Phase', 
@@ -93,6 +97,9 @@ def create_links_to_disease_targets(moleculed_df):
     sub_molecule_df_1['score'] = 1.0
     sub_molecule_df_1[':TYPE'] = "Known_Molecule_Link_To_Target"
     target_relationships = sub_molecule_df_1[[':START_ID', 'score', ':END_ID', ':TYPE']]
+    # Replace any remaining empty strings
+    target_relationships = target_relationships.replace(r'^\s*$', "No record", regex=True)
+    target_relationships = target_relationships.fillna("No record")
     
     # Create disease relationships
     sub_molecule_df_2 = moleculed_df[[':ID', 'Linked_Diseases']]
@@ -102,6 +109,9 @@ def create_links_to_disease_targets(moleculed_df):
     sub_molecule_df_2['score'] = 1.0
     sub_molecule_df_2[':TYPE'] = "Known_Molecule_Link_To_Disease"
     disease_relationships = sub_molecule_df_2[[':START_ID', 'score', ':END_ID', ':TYPE']]
+    # Replace any remaining empty strings
+    disease_relationships = disease_relationships.replace(r'^\s*$', "No record", regex=True)
+    disease_relationships = disease_relationships.fillna("No record")
     
     return molecule_df, target_relationships, disease_relationships
 
