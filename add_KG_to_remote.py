@@ -1,12 +1,15 @@
 import paramiko
 import os
+from dotenv import load_dotenv
 
-# Remote server connection details
-hostname = "147.182.137.125"
-username = "rdpuserrs"
-ssh_key_path = "/Users/raehash/.ssh/id_ed25519_1" 
-port = 22  # Default SSH port
-passphrase = "passphrase"
+load_dotenv()
+
+# Remote server connection details from environment variables
+hostname = os.getenv("HOSTNAME")
+username = os.getenv("USERNAME")
+ssh_key_path = os.getenv("SSH_KEY_PATH")
+port = int(os.getenv("PORT", 22))  # Default to 22 if not specified
+passphrase = os.getenv("PASSPHRASE")
 
 # Path to CSV files on local machine
 local_files = [

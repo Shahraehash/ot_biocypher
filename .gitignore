@@ -1,2 +1,12 @@
+#Environment
+.env
+
+#Open Targets Data
+data/diseases/
+data/evidence/
+data/molecule/
+data/targets/
 data/Molecule_Embeddings.csv
-neo4j_data/Molecule.csv
+
+#Neo4j Data
+neo4j_data/
