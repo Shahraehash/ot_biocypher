@@ -48,10 +48,14 @@ Generate molecular embeddings using Recursion's MolE foundation model. The embed
 data/Molecule_Embeddings.csv
 ```
 
-This CSV file should contain at least the following columns:
+This output CSV file should contain the following columns:
 - `chembl_id`: The ChEMBL ID of the molecule
+- `canonical_smiles`: The canonical SMILES
 - `embedding`: The vector embedding of the molecule
-- `source`: The source of the embedding (e.g., "MolE")
+
+You can access the pretrained model code at: https://codeocean.com/capsule/2105466/tree/v1. In `How_to_use_MolE.ipynb`, 
+add a cell at the bottom that copies the information from `generate_molecular_embeddings_mole.ipynb`. For the input data, provide a CSV with two columns: `chembl_ids` and `canonical_smiles`. 
+
 
 ### 3. Construct Knowledge Graph
 
